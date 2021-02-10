@@ -10,14 +10,14 @@ import kotlinx.android.synthetic.main.navigation_activity.*
 
 abstract class BaseFragment(layout: Int) : Fragment() {
 
-    val layouID = layout
+    private val layoutId = layout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        inflater.inflate(layouID, container, false)
+        inflater.inflate(layoutId, container, false)
 
-    internal fun showProgress() = progressStatus(View.VISIBLE)
+    private fun showProgress() = progressStatus(View.VISIBLE)
 
-    internal fun hideProgress() = progressStatus(View.GONE)
+    private fun hideProgress() = progressStatus(View.GONE)
 
     private fun progressStatus(viewStatus: Int) =
         with(activity) {

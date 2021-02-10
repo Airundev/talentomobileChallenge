@@ -20,7 +20,7 @@ class PeopleFragment : BaseFragment(R.layout.fragment_movies) {
 
     private val binding by viewBinding(FragmentMoviesBinding::bind)
 
-    private val peopleViewModel: PeopleViewModel by
+    private val peopleViewModel: PeopleViewModel by inject()
     private val peopleAdapter: PeopleAdapter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

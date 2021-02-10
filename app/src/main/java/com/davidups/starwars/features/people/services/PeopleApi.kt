@@ -1,7 +1,7 @@
 package com.davidups.starwars.features.people.services
 
 import com.davidups.starwars.features.people.models.entity.PeopleEntity
-import okhttp3.Response
+import retrofit2.Response
 import retrofit2.http.GET
 
 internal interface PeopleApi {

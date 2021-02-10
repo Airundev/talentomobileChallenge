@@ -1,6 +1,6 @@
 package com.davidups.starwars.features.people.usecases
 
-import com.davidups.skell.core.interactor.UseCase
+import com.davidups.starwars.core.interactor.UseCase
 import com.davidups.starwars.core.functional.State
 import com.davidups.starwars.features.people.models.view.PeopleView
 
