@@ -2,6 +2,8 @@ package com.davidups.starwars.features.people.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.davidups.skell.R
 import com.davidups.skell.databinding.FragmentMoviesBinding
@@ -11,8 +13,10 @@ import com.davidups.starwars.core.extensions.showInfoAlertDialog
 import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
 import com.davidups.starwars.features.people.models.view.PeopleView
+import com.davidups.starwars.features.people.models.view.PersonDetailView
 import com.davidups.starwars.features.people.view.adapters.PeopleAdapter
 import com.davidups.starwars.features.people.view.viewmodels.PeopleViewModel
+import com.davidups.starwars.features.person.view.fragments.PersonFragment
 import com.kotlinpermissions.notNull
 import org.koin.android.ext.android.inject
 
@@ -28,7 +32,7 @@ class PeopleFragment : BaseFragment(R.layout.fragment_movies) {
 
         with(peopleViewModel) {
             observe(showSpinner, ::handleShowSpinner)
-            observe(people, ::handleMovies)
+            observe(peopleView, ::handleMovies)
             failure(failure, ::handleFailure)
         }
     }
@@ -49,7 +53,15 @@ class PeopleFragment : BaseFragment(R.layout.fragment_movies) {
         }
     }
 
-    private fun initListeners() {}
+    private fun initListeners() {
+        peopleAdapter.clickListener = {
+            val personDetail: PersonDetailView? = peopleViewModel.people.value?.results?.find {
+                    person -> person.name == it.name
+            }?.toPersonDetailView()
+            val bundle = bundleOf(PersonFragment.PERSON_KEY to personDetail)
+            view?.findNavController()?.navigate(R.id.Person, bundle)
+        }
+    }
 
     private fun handleMovies(people: PeopleView?) {
         people.notNull { movies ->

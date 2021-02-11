@@ -16,5 +16,10 @@
         android:name="com.davidups.starwars.features.planets.view.fragments.PlanetsListFragment"
         android:label="Planets"
         tools:layout="@layout/fragment_planets"/>
+    <fragment
+        android:id="@+id/Person"
+        android:name="com.davidups.starwars.features.person.view.fragments.PersonFragment"
+        android:label="Person"
+        tools:layout="@layout/fragment_person"/>
 
 </navigation>

@@ -7,6 +7,7 @@ import com.davidups.starwars.core.interactor.UseCase
 import com.davidups.starwars.core.functional.Error
 import com.davidups.starwars.core.functional.Success
 import com.davidups.starwars.core.platform.BaseViewModel
+import com.davidups.starwars.features.people.models.data.People
 import com.davidups.starwars.features.people.models.view.PeopleView
 import com.davidups.starwars.features.people.usecases.GetPeople
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +20,8 @@ import kotlinx.coroutines.launch
 
 class PeopleViewModel(private val getPeople: GetPeople) : BaseViewModel() {
 
-    var people = MutableLiveData<PeopleView>()
+    var people = MutableLiveData<People>()
+    var peopleView = MutableLiveData<PeopleView>()
     private var getMoviesJob: Job? = null
 
     @ExperimentalCoroutinesApi
@@ -32,8 +34,9 @@ class PeopleViewModel(private val getPeople: GetPeople) : BaseViewModel() {
                 .catch { failure -> handleFailure(failure) }
                 .collect { result ->
                     when (result) {
-                        is Success<PeopleView> -> {
+                        is Success<People> -> {
                             people.value = result.data
+                            peopleView.value = result.data.toPeopleView()
                         }
                         is Error -> {
                         }

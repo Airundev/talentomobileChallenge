@@ -3,7 +3,7 @@ package com.davidups.starwars.features.people.usecases
 import com.davidups.starwars.core.functional.Error
 import com.davidups.starwars.core.functional.State
 import com.davidups.starwars.core.functional.Success
-import com.davidups.starwars.features.people.models.view.PeopleView
+import com.davidups.starwars.features.people.models.data.People
 import com.davidups.starwars.features.people.services.PeopleService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.flowOn
 
 interface PeopleRepository {
 
-    fun getPeople(): Flow<State<PeopleView>>
+    fun getPeople(): Flow<State<People>>
 
     class Network(
         private val ioDispatcher: CoroutineDispatcher,
@@ -21,16 +21,14 @@ interface PeopleRepository {
     ) : PeopleRepository {
 
         override fun getPeople() =
-            flow {
-                emit(people())
-            }
+            flow { emit(people()) }
                 .catch { emit(Error(Throwable("s"))) }
                 .flowOn(ioDispatcher)
 
-        private suspend fun people() = service.getPeople()
-            .run {
+        private suspend fun people() =
+            service.getPeople().run {
                 if (isSuccessful && body() != null) {
-                    Success(body()!!.toPeople().toPeopleView())
+                    Success(body()!!.toPeople())
                 } else {
                     Error(Throwable("s"))
                 }
