@@ -9,6 +9,7 @@ import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
 import com.davidups.starwars.features.people.models.view.PersonDetail
 import com.davidups.starwars.features.person.view.viewmodels.PersonViewModel
+import kotlinx.android.synthetic.main.fragment_person.*
 import org.koin.android.ext.android.inject
 
 class PersonFragment : BaseFragment(R.layout.fragment_person) {
@@ -19,12 +20,20 @@ class PersonFragment : BaseFragment(R.layout.fragment_person) {
 
     private val personDetail: PersonDetail? by lazy { arguments?.getParcelable<PersonDetail>(PERSON_KEY) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        with(personViewModel) {
+            observe(isFavorite, ::onFavoriteChange)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
+        personViewModel.checkIfFavorite(personDetail)
 
-        personViewModel.deleteFavorite(personDetail)
+        initView()
     }
 
     private fun initView() {
@@ -34,7 +43,16 @@ class PersonFragment : BaseFragment(R.layout.fragment_person) {
             tvBirthYear.text = personDetail?.birthYear
             tvGender.text = personDetail?.gender
             tvHeight.text = personDetail?.height
+            tvFavorite.onClick {
+                personDetail?.isFavorite?.let { isFav ->
+                    if (isFav) personViewModel.deleteFavorite(personDetail) else personViewModel.saveFavorite(personDetail)
+                }
+            }
         }
+    }
+
+    private fun onFavoriteChange(isFav: Boolean?) {
+        binding.tvFavorite.text = if (isFav!!) "Remove from favorite" else "Save as favorite"
     }
 
     companion object {

@@ -17,10 +17,11 @@ data class Person(
 
     fun toPersonView() = PersonView(name ?: String.empty())
 
-    fun toPersonDetail() = PersonDetail(
+    fun toPersonDetail(isFav: Boolean) = PersonDetail(
         name ?: String.empty(),
         birth_year ?: String.empty(),
         gender ?: String.empty(),
-        height ?: String.empty()
+        height ?: String.empty(),
+        isFav
     )
 }

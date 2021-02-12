@@ -9,7 +9,8 @@ data class PersonDetail(
     val name: String?,
     val birthYear: String?,
     val gender: String?,
-    val height: String?
+    val height: String?,
+    var isFavorite: Boolean
 ): Parcelable {
 
     fun toDBEntity() = PersonDBEntity(name.hashCode(), name, birthYear, gender, height)

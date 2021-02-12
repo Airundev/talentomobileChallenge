@@ -11,5 +11,5 @@ data class PersonDBEntity(
         @ColumnInfo(name = "gender") val gender: String?,
         @ColumnInfo(name = "height") val height: String?
 ) {
-        fun toPersonDetail() = PersonDetail(name, birthYear, gender, height)
+        fun toPersonDetail() = PersonDetail(name, birthYear, gender, height, true)
 }

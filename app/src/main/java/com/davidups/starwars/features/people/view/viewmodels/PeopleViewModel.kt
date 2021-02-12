@@ -9,6 +9,8 @@ import com.davidups.starwars.core.functional.Success
 import com.davidups.starwars.core.platform.BaseViewModel
 import com.davidups.starwars.features.people.models.data.People
 import com.davidups.starwars.features.people.models.view.PeopleView
+import com.davidups.starwars.features.people.models.view.PersonDetail
+import com.davidups.starwars.features.people.usecases.GetFavorites
 import com.davidups.starwars.features.people.usecases.GetPeople
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -18,11 +20,14 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-class PeopleViewModel(private val getPeople: GetPeople) : BaseViewModel() {
+class PeopleViewModel(private val getPeople: GetPeople,
+                      private val getFavorites: GetFavorites) : BaseViewModel() {
 
     var people = MutableLiveData<People>()
     var peopleView = MutableLiveData<PeopleView>()
+    var favoritePeople = MutableLiveData<List<PersonDetail>>()
     private var getMoviesJob: Job? = null
+    private var getFavoritesJob: Job? = null
 
     @ExperimentalCoroutinesApi
     fun getPeople() {
@@ -42,6 +47,16 @@ class PeopleViewModel(private val getPeople: GetPeople) : BaseViewModel() {
                         }
                     }
                 }
+        }
+        getFavorites()
+    }
+
+    fun getFavorites() {
+        getFavoritesJob.cancelIfActive()
+        getFavoritesJob = viewModelScope.launch {
+            getFavorites(UseCase.None())
+                .catch { failure -> handleFailure(failure) }
+                .collect { favoritePeople.value = it }
         }
     }
 }

@@ -57,7 +57,7 @@ class PeopleFragment : BaseFragment(R.layout.fragment_movies) {
         peopleAdapter.clickListener = {
             val personDetail: PersonDetail? = peopleViewModel.people.value?.results?.find {
                     person -> person.name == it.name
-            }?.toPersonDetail()
+            }?.toPersonDetail(peopleViewModel.favoritePeople.value?.find { person -> person.name == it.name } != null)
             val bundle = bundleOf(PersonFragment.PERSON_KEY to personDetail)
             view?.findNavController()?.navigate(R.id.Person, bundle)
         }
