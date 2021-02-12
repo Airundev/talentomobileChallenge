@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             toolbar.title = when (destination.id) {
-                R.id.people -> destination.label
+                R.id.people, R.id.favorites -> destination.label
                 else -> ""
             }
 

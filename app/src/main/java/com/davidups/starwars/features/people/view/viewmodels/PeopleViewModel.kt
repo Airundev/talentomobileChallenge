@@ -29,7 +29,6 @@ class PeopleViewModel(private val getPeople: GetPeople,
     private var getMoviesJob: Job? = null
     private var getFavoritesJob: Job? = null
 
-    @ExperimentalCoroutinesApi
     fun getPeople() {
         getMoviesJob.cancelIfActive()
         getMoviesJob = viewModelScope.launch {
@@ -55,6 +54,8 @@ class PeopleViewModel(private val getPeople: GetPeople,
         getFavoritesJob.cancelIfActive()
         getFavoritesJob = viewModelScope.launch {
             getFavorites(UseCase.None())
+                .onStart { handleShowSpinner(true) }
+                .onEach { handleShowSpinner(false) }
                 .catch { failure -> handleFailure(failure) }
                 .collect { favoritePeople.value = it }
         }

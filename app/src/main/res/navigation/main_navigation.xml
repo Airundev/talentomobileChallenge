@@ -16,6 +16,13 @@
         android:name="com.davidups.starwars.features.planets.view.fragments.PlanetsListFragment"
         android:label="Planets"
         tools:layout="@layout/fragment_planets"/>
+
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.davidups.starwars.features.favorites.view.fragments.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_movies"/>
+
     <fragment
         android:id="@+id/Person"
         android:name="com.davidups.starwars.features.person.view.fragments.PersonFragment"

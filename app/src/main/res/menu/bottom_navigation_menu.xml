@@ -10,6 +10,13 @@
         android:icon="@drawable/ic_movies"/>
 
     <item
+        android:id="@+id/favorites"
+        android:title="Favorites"
+        app:showAsAction="always"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_people"/>
+
+    <item
         android:id="@+id/planets"
         android:title="Planets"
         app:showAsAction="always"

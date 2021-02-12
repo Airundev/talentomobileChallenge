@@ -8,7 +8,7 @@ import com.davidups.starwars.core.database.dao.PersonDao
 import com.davidups.starwars.core.database.entity.PersonDBEntity
 
 
-@Database(entities = [PersonDBEntity::class], version = 2)
+@Database(entities = [PersonDBEntity::class], version = 3)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun personDao(): PersonDao
