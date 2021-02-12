@@ -7,21 +7,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.davidups.skell.R
 import com.davidups.skell.databinding.FragmentMoviesBinding
-import com.davidups.skell.databinding.FragmentPeopleBinding
-import com.davidups.starwars.core.extensions.failure
 import com.davidups.starwars.core.extensions.observe
-import com.davidups.starwars.core.extensions.onClick
-import com.davidups.starwars.core.extensions.showInfoAlertDialog
 import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
-import com.davidups.starwars.features.people.models.view.PeopleView
 import com.davidups.starwars.features.people.models.view.PersonDetail
-import com.davidups.starwars.features.people.models.view.PersonView
 import com.davidups.starwars.features.people.view.adapters.PeopleAdapter
 import com.davidups.starwars.features.people.view.viewmodels.PeopleViewModel
 import com.davidups.starwars.features.person.view.fragments.PersonFragment
 import com.kotlinpermissions.notNull
-import kotlinx.android.synthetic.main.navigation_activity.*
 import org.koin.android.ext.android.inject
 
 class FavoritesFragment : BaseFragment(R.layout.fragment_movies) {

@@ -9,7 +9,6 @@ import com.davidups.skell.R
 import com.davidups.skell.databinding.FragmentMoviesBinding
 import com.davidups.starwars.core.extensions.failure
 import com.davidups.starwars.core.extensions.observe
-import com.davidups.starwars.core.extensions.onClick
 import com.davidups.starwars.core.extensions.showInfoAlertDialog
 import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
@@ -19,7 +18,6 @@ import com.davidups.starwars.features.people.view.adapters.PeopleAdapter
 import com.davidups.starwars.features.people.view.viewmodels.PeopleViewModel
 import com.davidups.starwars.features.person.view.fragments.PersonFragment
 import com.kotlinpermissions.notNull
-import kotlinx.android.synthetic.main.navigation_activity.*
 import org.koin.android.ext.android.inject
 
 class PeopleFragment : BaseFragment(R.layout.fragment_movies) {

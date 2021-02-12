@@ -12,7 +12,6 @@ import com.davidups.starwars.features.people.models.view.PeopleView
 import com.davidups.starwars.features.people.models.view.PersonDetail
 import com.davidups.starwars.features.people.usecases.GetFavorites
 import com.davidups.starwars.features.people.usecases.GetPeople
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
