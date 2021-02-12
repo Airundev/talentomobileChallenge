@@ -7,18 +7,24 @@ import com.davidups.skell.databinding.FragmentPersonBinding
 import com.davidups.starwars.core.extensions.*
 import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
-import com.davidups.starwars.features.people.models.view.PersonDetailView
+import com.davidups.starwars.features.people.models.view.PersonDetail
+import com.davidups.starwars.features.person.view.viewmodels.PersonViewModel
+import org.koin.android.ext.android.inject
 
 class PersonFragment : BaseFragment(R.layout.fragment_person) {
 
     private val binding by viewBinding(FragmentPersonBinding::bind)
 
-    private val personDetail: PersonDetailView? by lazy { arguments?.getParcelable<PersonDetailView>(PERSON_KEY) }
+    private val personViewModel: PersonViewModel by inject()
+
+    private val personDetail: PersonDetail? by lazy { arguments?.getParcelable<PersonDetail>(PERSON_KEY) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
+        personViewModel.deleteFavorite(personDetail)
     }
 
     private fun initView() {

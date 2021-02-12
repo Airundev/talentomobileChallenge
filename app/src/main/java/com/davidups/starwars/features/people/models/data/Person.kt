@@ -1,7 +1,7 @@
 package com.davidups.starwars.features.people.models.data
 
 import com.davidups.starwars.core.extensions.empty
-import com.davidups.starwars.features.people.models.view.PersonDetailView
+import com.davidups.starwars.features.people.models.view.PersonDetail
 import com.davidups.starwars.features.people.models.view.PersonView
 
 data class Person(
@@ -17,7 +17,7 @@ data class Person(
 
     fun toPersonView() = PersonView(name ?: String.empty())
 
-    fun toPersonDetailView() = PersonDetailView(
+    fun toPersonDetail() = PersonDetail(
         name ?: String.empty(),
         birth_year ?: String.empty(),
         gender ?: String.empty(),

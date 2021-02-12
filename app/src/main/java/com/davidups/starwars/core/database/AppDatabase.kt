@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.davidups.starwars.core.database.dao.PersonDao
+import com.davidups.starwars.core.database.entity.PersonDBEntity
 
 
-@Database(entities = [], version = 2)
+@Database(entities = [PersonDBEntity::class], version = 2)
 abstract class AppDatabase: RoomDatabase() {
+
+    abstract fun personDao(): PersonDao
 
 
     companion object {
@@ -17,8 +21,7 @@ abstract class AppDatabase: RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(AppDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        AppDatabase::class.java,
-                        "starWarsDB").build()
+                        AppDatabase::class.java, "starWarsDB").build()
                 }
             }
             return INSTANCE

@@ -13,7 +13,7 @@ import com.davidups.starwars.core.extensions.showInfoAlertDialog
 import com.davidups.starwars.core.platform.BaseFragment
 import com.davidups.starwars.core.platform.viewBinding.viewBinding
 import com.davidups.starwars.features.people.models.view.PeopleView
-import com.davidups.starwars.features.people.models.view.PersonDetailView
+import com.davidups.starwars.features.people.models.view.PersonDetail
 import com.davidups.starwars.features.people.view.adapters.PeopleAdapter
 import com.davidups.starwars.features.people.view.viewmodels.PeopleViewModel
 import com.davidups.starwars.features.person.view.fragments.PersonFragment
@@ -55,9 +55,9 @@ class PeopleFragment : BaseFragment(R.layout.fragment_movies) {
 
     private fun initListeners() {
         peopleAdapter.clickListener = {
-            val personDetail: PersonDetailView? = peopleViewModel.people.value?.results?.find {
+            val personDetail: PersonDetail? = peopleViewModel.people.value?.results?.find {
                     person -> person.name == it.name
-            }?.toPersonDetailView()
+            }?.toPersonDetail()
             val bundle = bundleOf(PersonFragment.PERSON_KEY to personDetail)
             view?.findNavController()?.navigate(R.id.Person, bundle)
         }
